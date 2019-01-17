@@ -1,5 +1,5 @@
 {
-    "name": "laravel-admin-ext/latlong",
+    "name": "feng-laravel-admin/latlong",
     "description": "Latitude & Longitude selector",
     "type": "library",
     "keywords": ["laravel-admin", "extension"],
