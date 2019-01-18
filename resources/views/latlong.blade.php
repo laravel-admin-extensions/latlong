@@ -17,7 +17,15 @@
 
         <br>
 
-        <div id="map_{{$id['lat'].$id['lng']}}" style="width: 100%;height: {{ $height }}px"></div>
+        <div id="map_{{$id['lat'].$id['lng']}}" style="width: 100%;height: {{ $height }}px">
+            <div id="panel" style="  position: absolute;
+            background-color: white;
+            max-height: 90%;
+            overflow-y: auto;
+            top: 10px;
+            right: 10px;
+            width: 280px;z-index: 20"></div>
+        </div>
 
         @include('admin::form.help-block')
 
