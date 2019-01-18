@@ -3,7 +3,7 @@
     "description": "Latitude & Longitude selector",
     "type": "library",
     "keywords": ["laravel-admin", "extension"],
-    "homepage": "https://github.com/laravel-admin-ext/latlong",
+    "homepage": "https://github.com/wuqingfengdada/latlong",
     "license": "MIT",
     "authors": [
         {
