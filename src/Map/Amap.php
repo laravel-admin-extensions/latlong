@@ -18,14 +18,14 @@ class Amap extends AbstractMap
     
         var map = new AMap.Map(name, {
             zoom:11,
-            center: [lat.val()|| 0, lng.val()|| 0],//中心点坐标
+            center: [lng.val() || 0, lat.val() || 0],//中心点坐标
             viewMode:'3D'//使用3D视图
         });
         
         var marker = new AMap.Marker({
             map: map,
             draggable: true,
-            position: [lat.val() || 0, lng.val()|| 0],
+            position: [lng.val() || 0, lat.val() || 0],
         })
 
         map.on('click', function(e) {
