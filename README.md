@@ -1,7 +1,9 @@
-经纬度选择器
+Latitude and longitude selector
 ======
 
 这个扩展用来帮助你在form表单中选择经纬度，用来替代`Laravel-admin`中内置的`Form\Field\Map`组件, 组件支持的地图包括`Google map`、`百度地图`、`高德地图`、`腾讯地图`、`Yadex map`.
+
+This extension is used to help you select the latitude and longitude in the form, which is used to replace the  `Laravel-admin` built in `Form\Field\Map` component. The supported maps include `Google map`, `Baidu map`, `AMap`, `Tencent Map`, `Yadex map`.
 
 ## Installation
 
@@ -11,7 +13,7 @@ composer require laravel-admin-ext/latlong -vvv
 
 ## Configuration
 
-打开config/admin.php，按照你的情况在extensions部分加上如下的配置：
+Open `config/admin.php` and add the following configuration to the extensions section:
 
 ```php
 
@@ -19,16 +21,20 @@ composer require laravel-admin-ext/latlong -vvv
 
         'latlong' => [
 
-            // 是否开始这个组件，默认true
+            // Whether to enable this extension, defaults to true
             'enable' => true,
 
-            // 选择下面指定的provider
-            'default' => 'yandex',
+            // Specify the default provider
+            'default' => 'google',
 
-            // 根据上面的选择，填写相应地图的api_key，api_key需要到相应的平台去自行申请
+            // According to the selected provider above, fill in the corresponding api_key
             'providers' => [
 
                 'google' => [
+                    'api_key' => '',
+                ],
+                
+                'yadex' => [
                     'api_key' => '',
                 ],
 
@@ -51,15 +57,15 @@ composer require laravel-admin-ext/latlong -vvv
 
 ## Usage
 
-假设你的表中有两个字段`latitude`和`longitude`分别表示纬度和经度，那么在表单中使用如下：
+Suppose you have two fields `latitude` and `longitude` in your table that represent latitude and longitude, then use the following in the form:
 ```php
-$form->latlong('latitude', 'longitude', '经纬度选择');
+$form->latlong('latitude', 'longitude', 'Position');
 
-// 设置地图高度
-$form->latlong('latitude', 'longitude', '经纬度')->height(500);
+// Set the map height
+$form->latlong('latitude', 'longitude', 'Position')->height(500);
 
-// 设置默认值
-$form->latlong('latitude', 'longitude', '经纬度')->default(['lat' => 90, 'lng' => 90]);
+// Set default position
+$form->latlong('latitude', 'longitude', 'Position')->default(['lat' => 90, 'lng' => 90]);
 ```
 
 ## Donate
