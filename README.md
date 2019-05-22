@@ -68,6 +68,12 @@ $form->latlong('latitude', 'longitude', 'Position')->height(500);
 $form->latlong('latitude', 'longitude', 'Position')->default(['lat' => 90, 'lng' => 90]);
 ```
 
+Use in show page
+
+```php
+$show->field('Position')->latlong('lat_column', 'long_column', $height = 400);
+```
+
 ## Donate
 
 如果觉得这个项目帮你节约了时间，不妨支持一下;)
