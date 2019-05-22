@@ -58,7 +58,7 @@ class Latlong extends Field
      * @param int $height
      * @return $this
      */
-    public function height($height = 300)
+    public function height(int $height)
     {
         $this->height = $height;
 
@@ -74,6 +74,11 @@ class Latlong extends Field
     {
         $this->script = Extension::getProvider()->applyScript($this->id);
 
-        return parent::render()->with(['height' => $this->height]);
+        $variables = [
+            'height'   => $this->height,
+            'provider' => Extension::config('default'),
+        ];
+
+        return parent::render()->with($variables);
     }
 }

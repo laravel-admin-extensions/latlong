@@ -8,7 +8,7 @@ class Yandex extends AbstractMap
      * @var string
      */
     protected $api = '//api-maps.yandex.ru/2.1/?lang=ru_RU';
-    
+
     /**
      * {@inheritdoc}
      */

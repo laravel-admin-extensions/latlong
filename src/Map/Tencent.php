@@ -7,7 +7,7 @@ class Tencent extends AbstractMap
     /**
      * @var string
      */
-    protected $api = '//map.qq.com/api/js?v=2.exp&key=%s';
+    protected $api = '//map.qq.com/api/js?v=2.exp&key=%s&libraries=place';
 
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class Tencent extends AbstractMap
                 var container = document.getElementById("map_"+name);
                 var map = new qq.maps.Map(container, {
                     center: center,
-                    zoom: 13
+                    zoom: 18
                 });
 
                 var marker = new qq.maps.Marker({
@@ -53,6 +53,16 @@ class Tencent extends AbstractMap
                     var position = marker.getPosition();
                     lat.val(position.getLat());
                     lng.val(position.getLng());
+                });
+
+                var ap = new qq.maps.place.Autocomplete(document.getElementById("search-{$id['lat']}{$id['lng']}"));
+
+                var searchService = new qq.maps.SearchService({
+                    map : map
+                });
+
+                qq.maps.event.addListener(ap, "confirm", function(res){
+                    searchService.search(res.value);
                 });
             }
 

@@ -17,7 +17,7 @@ class Amap extends AbstractMap
         var lng = $('#{$id['lng']}');
     
         var map = new AMap.Map(name, {
-            zoom:11,
+            zoom:18,
             center: [lng.val() || 0, lat.val() || 0],//中心点坐标
             viewMode:'3D'//使用3D视图
         });
@@ -53,8 +53,22 @@ class Amap extends AbstractMap
                 });
             });
         }
+
+        AMap.plugin('AMap.Autocomplete',function(){
+            var autoOptions = {
+                input:"search-{$id['lat']}{$id['lng']}"
+            };
+            var autocomplete= new AMap.Autocomplete(autoOptions);
+
+            AMap.event.addListener(autocomplete, "select", function(data){
+                map.setZoomAndCenter(18, data.poi.location);
+                marker.setPosition(data.poi.location);
+                lat.val(data.poi.location.lat);
+                lng.val(data.poi.location.lng);
+            });
+        });
     }
-    
+
     init('map_{$id['lat']}{$id['lng']}');
 })();
 EOT;

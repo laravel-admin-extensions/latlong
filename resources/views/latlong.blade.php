@@ -13,6 +13,18 @@
             <div class="col-md-3">
                 <input id="{{$id['lat']}}" name="{{$name['lat']}}" class="form-control" value="{{ old($column['lat'], $value['lat']) }}" {!! $attributes !!} />
             </div>
+
+            @if($provider != 'yandex')
+            <div class="col-md-3 col-md-offset-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search-{{$id['lat'].$id['lng']}}">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+            @endif
+
         </div>
 
         <br>
