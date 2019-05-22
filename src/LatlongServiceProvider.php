@@ -4,6 +4,7 @@ namespace Encore\Admin\Latlong;
 
 use Encore\Admin\Admin;
 use Encore\Admin\Form;
+use Encore\Admin\Show;
 use Illuminate\Support\ServiceProvider;
 
 class LatlongServiceProvider extends ServiceProvider
@@ -21,6 +22,7 @@ class LatlongServiceProvider extends ServiceProvider
 
         Admin::booting(function () {
             Form::extend('latlong', Latlong::class);
+            Show\Field::macro('latlong', Extension::showField());
         });
     }
 }

@@ -3,7 +3,6 @@
 namespace Encore\Admin\Latlong;
 
 use Encore\Admin\Form\Field;
-use Encore\Admin\Latlong\Map;
 
 class Latlong extends Field
 {
@@ -13,22 +12,6 @@ class Latlong extends Field
      * @var array
      */
     protected $column = [];
-
-    /**
-     * @var array
-     */
-    protected static $providers = [
-        'baidu'   => Map\Baidu::class,
-        'tencent' => Map\Tencent::class,
-        'amap'    => Map\Amap::class,
-        'google'  => Map\Google::class,
-        'yandex'  => Map\Yandex::class,
-    ];
-
-    /**
-     * @var Map\AbstractMap
-     */
-    protected static $provider;
 
     /**
      * @var string
@@ -49,23 +32,7 @@ class Latlong extends Field
      */
     public static function getAssets()
     {
-        return ['js' => static::getProvider()->getAssets()];
-    }
-
-    /**
-     * @param string $name
-     * @return Map\AbstractMap
-     */
-    public static function getProvider($name = '')
-    {
-        if (static::$provider) {
-            return static::$provider;
-        }
-
-        $name = Extension::config('default', $name);
-        $args = Extension::config("providers.$name", []);
-
-        return static::$provider = new static::$providers[$name](...array_values($args));
+        return ['js' => Extension::getProvider()->getAssets()];
     }
 
     /**
@@ -105,7 +72,7 @@ class Latlong extends Field
      */
     public function render()
     {
-        $this->script = static::getProvider()->applyScript($this->id);
+        $this->script = Extension::getProvider()->applyScript($this->id);
 
         return parent::render()->with(['height' => $this->height]);
     }
