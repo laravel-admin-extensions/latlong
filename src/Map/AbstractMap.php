@@ -2,8 +2,15 @@
 
 namespace Encore\Admin\Latlong\Map;
 
+
 abstract class AbstractMap
 {
+    /**
+     * Set to true to automatically get the current position from the browser
+     * @var bool
+     */
+    protected $autoPosition = false;
+
     /**
      * @var string
      */
@@ -26,6 +33,16 @@ abstract class AbstractMap
     public function getAssets()
     {
         return [$this->api];
+    }
+
+    /**
+     * Set true to automatically get the current position from the browser on page load
+     * @param $bool
+     * @return $this
+     */
+    public function setAutoPosition($bool) {
+        $this->autoPosition = $bool;
+        return $this;
     }
 
     /**
