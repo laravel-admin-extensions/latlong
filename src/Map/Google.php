@@ -34,7 +34,7 @@ class Google extends AbstractMap
                 var container = document.getElementById("map_"+name);
                 var map = new google.maps.Map(container, options);
                 
-                if (navigator.geolocation) {
+                if (navigator.geolocation && {$id['autoPosition']}) {
                   navigator.geolocation.getCurrentPosition(function(position) {
                     var pos = {
                       lat: position.coords.latitude,

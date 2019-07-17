@@ -7,6 +7,11 @@ use Encore\Admin\Form\Field;
 class Latlong extends Field
 {
     /**
+     * Set to true to automatically get the current position from the browser
+     * @var bool
+     */
+    protected $getCurrentPosition = false;
+    /**
      * Column name.
      *
      * @var array
@@ -66,6 +71,14 @@ class Latlong extends Field
     }
 
     /**
+     * Set true to automatically get the current position from the browser on page load
+     * @param $bool
+     */
+    public function getCurrentPosition($bool) {
+        $this->getCurrentPosition = $bool;
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
@@ -76,6 +89,7 @@ class Latlong extends Field
 
         $variables = [
             'height'   => $this->height,
+            'autoPosition'   => $this->getCurrentPosition,
             'provider' => Extension::config('default'),
         ];
 
