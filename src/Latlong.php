@@ -10,7 +10,7 @@ class Latlong extends Field
      * Set to true to automatically get the current position from the browser
      * @var bool
      */
-    protected $getCurrentPosition = false;
+    protected $autoPosition = false;
     /**
      * Column name.
      *
@@ -73,9 +73,11 @@ class Latlong extends Field
     /**
      * Set true to automatically get the current position from the browser on page load
      * @param $bool
+     * @return Latlong
      */
-    public function getCurrentPosition($bool) {
+    public function setAutoPosition($bool) {
         $this->getCurrentPosition = $bool;
+        return $this;
     }
 
     /**
@@ -85,11 +87,10 @@ class Latlong extends Field
      */
     public function render()
     {
-        $this->script = Extension::getProvider()->applyScript($this->id);
+        $this->script = Extension::getProvider()->setAutoPosition($this->autoPosition)->applyScript($this->id);
 
         $variables = [
             'height'   => $this->height,
-            'autoPosition'   => $this->getCurrentPosition,
             'provider' => Extension::config('default'),
         ];
 

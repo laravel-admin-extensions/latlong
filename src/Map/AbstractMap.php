@@ -30,6 +30,7 @@ abstract class AbstractMap
 
     /**
      * @param array $id
+     * @param bool $autoPosition
      * @return string
      */
     abstract public function applyScript(array $id);
