@@ -76,7 +76,7 @@ class Latlong extends Field
      * @return Latlong
      */
     public function setAutoPosition($bool) {
-        $this->getCurrentPosition = $bool;
+        $this->autoPosition = $bool;
         return $this;
     }
 
