@@ -14,6 +14,7 @@ class Google extends AbstractMap
      */
     public function applyScript(array $id)
     {
+        $autoPosition = ($this->autoPosition)?'1':'0';
         return <<<EOT
         (function() {
             function init(name) {
@@ -34,7 +35,7 @@ class Google extends AbstractMap
                 var container = document.getElementById("map_"+name);
                 var map = new google.maps.Map(container, options);
                 
-                if (navigator.geolocation) {
+                if (navigator.geolocation && {$autoPosition}) {
                   navigator.geolocation.getCurrentPosition(function(position) {
                     var pos = {
                       lat: position.coords.latitude,
