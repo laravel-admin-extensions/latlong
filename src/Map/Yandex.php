@@ -14,7 +14,7 @@ class Yandex extends AbstractMap
      */
     public function applyScript(array $id)
     {
-        return <<<EOT
+        return <<<JS
         (function() {
             function init(name) {
                 ymaps.ready(function(){
@@ -24,7 +24,8 @@ class Yandex extends AbstractMap
         
                     var myMap = new ymaps.Map("map_"+name, {
                         center: [lat.val(), lng.val()],
-                        zoom: 18
+                        zoom: 17,
+                        controls: ['zoomControl', 'typeSelector', 'fullscreenControl', 'rulerControl','geolocationControl']
                     }); 
     
                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
@@ -39,12 +40,18 @@ class Yandex extends AbstractMap
                     });                
     
                     myMap.geoObjects.add(myPlacemark);
+                    
+                    myMap.events.group().add('click', function (e) {
+                        coords = e.get('coords');
+                        myPlacemark.geometry.setCoordinates(coords);
+                        lat.val(coords[0]);
+                        lng.val(coords[1]);
+                    });
                 });
-    
             }
             
             init('{$id['lat']}{$id['lng']}');
         })();
-EOT;
+JS;
     }
 }
