@@ -34,7 +34,7 @@ Open `config/admin.php` and add the following configuration to the extensions se
                     'api_key' => '',
                 ],
                 
-                'yadex' => [
+                'yandex' => [
                     'api_key' => '',
                 ],
 
