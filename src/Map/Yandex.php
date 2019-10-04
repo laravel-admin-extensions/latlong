@@ -47,6 +47,19 @@ class Yandex extends AbstractMap
                         lat.val(coords[0]);
                         lng.val(coords[1]);
                     });
+                    
+                    lat.on('change',function(){
+                        if (isFinite(lat.val())){
+                            myPlacemark.geometry.setCoordinates([lat.val(),lng.val()]);
+                            myMap.setCenter([lat.val(),lng.val()]);
+                        }
+                    });
+                    lng.on('change',function(){
+                        if (isFinite(lng.val())){
+                            myPlacemark.geometry.setCoordinates([lat.val(),lng.val()]);
+                            myMap.setCenter([lat.val(),lng.val()]);
+                        }
+                    });
                 });
             }
             
