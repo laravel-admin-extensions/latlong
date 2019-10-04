@@ -49,16 +49,26 @@ class Yandex extends AbstractMap
                     });
                     
                     lat.on('change',function(){
-                        if (isFinite(lat.val())){
+                        if (lat.val().length>0 && isFinite(lat.val())){
                             myPlacemark.geometry.setCoordinates([lat.val(),lng.val()]);
                             myMap.setCenter([lat.val(),lng.val()]);
                         }
                     });
                     lng.on('change',function(){
-                        if (isFinite(lng.val())){
+                        if (lng.val().length>0 && isFinite(lng.val())){
                             myPlacemark.geometry.setCoordinates([lat.val(),lng.val()]);
                             myMap.setCenter([lat.val(),lng.val()]);
                         }
+                    });
+                    
+                    ymaps.geolocation.get({
+                        mapStateAutoApply: true
+                    }).then(function (result) {
+                        if (lat.val().length==0 || lng.val().length==0)
+                        var pos=result.geoObjects.position;
+                        lat.val(pos[0]);
+                        lng.val(pos[1]);
+                        lat.trigger('change');
                     });
                 });
             }
