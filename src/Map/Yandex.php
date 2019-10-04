@@ -64,11 +64,12 @@ class Yandex extends AbstractMap
                     ymaps.geolocation.get({
                         mapStateAutoApply: true
                     }).then(function (result) {
-                        if (lat.val().length==0 || lng.val().length==0)
-                        var pos=result.geoObjects.position;
-                        lat.val(pos[0]);
-                        lng.val(pos[1]);
-                        lat.trigger('change');
+                        if (lat.val().length==0 || lng.val().length==0){
+                            var pos=result.geoObjects.position;
+                            lat.val(pos[0]);
+                            lng.val(pos[1]);
+                            lat.trigger('change');
+                        }
                     });
                 });
             }
