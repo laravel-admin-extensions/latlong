@@ -66,6 +66,12 @@ $form->latlong('latitude', 'longitude', 'Position')->height(500);
 
 // Set default position
 $form->latlong('latitude', 'longitude', 'Position')->default(['lat' => 90, 'lng' => 90]);
+
+$form->latlong('lat','lon')->callbacks([
+            'address'=>'parseAddress', //parseAddress is js function name with data param. You may rename it what you want. Define it in external js before using!
+            'district'=>'parseDistrict',
+            'metro'=>'parseMetro'
+        ]);
 ```
 
 Use in show page
