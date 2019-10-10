@@ -39,6 +39,16 @@ JS;
         else{
             $callbacks['district']='console.log';
         }
+        if (isset($callbacks['map']) && !empty($callbacks['map'])){
+            $addjs.=<<<JS
+var map_callback_{$id['lat']}{$id['lng']}=1;
+JS;
+        }
+        if (isset($callbacks['placemark']) && !empty($callbacks['placemark'])){
+            $addjs.=<<<JS
+var placemark_callback_{$id['lat']}{$id['lng']}=1;
+JS;
+        }
         return <<<JS
 {$addjs}
         (function() {
@@ -103,7 +113,7 @@ JS;
                         center: [lat.val(), lng.val()],
                         zoom: 17,
                         controls: ['zoomControl', 'typeSelector', 'fullscreenControl', 'rulerControl','geolocationControl']
-                    }); 
+                    });
     
                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
                     }, {
@@ -153,6 +163,13 @@ JS;
                             myMap.setCenter(pos);
                         }
                     });
+                    
+                    if(typeof map_callback_{$id['lat']}{$id['lng']}!=='undefined'){
+                        {$callbacks['map']}(myMap);
+                    }
+                    if(typeof placemark_callback_{$id['lat']}{$id['lng']}!=='undefined'){
+                        {$callbacks['placemark']}(myPlacemark);
+                    }
                 });
             }
             
