@@ -65,7 +65,7 @@ $form->latlong('latitude', 'longitude', 'Position');
 $form->latlong('latitude', 'longitude', 'Position')->height(500);
 
 // Set the map zoom
-$form->latlong('latitude', 'longitude', 'Position')->zoom(2);
+$form->latlong('latitude', 'longitude', 'Position')->zoom(16);
 
 // Set default position
 $form->latlong('latitude', 'longitude', 'Position')->default(['lat' => 90, 'lng' => 90]);
@@ -74,7 +74,7 @@ $form->latlong('latitude', 'longitude', 'Position')->default(['lat' => 90, 'lng'
 Use in show page
 
 ```php
-$show->field('Position')->latlong('lat_column', 'long_column', $height = 400);
+$show->field('Position')->latlong('lat_column', 'long_column', $height = 400, $zoom = 16);
 ```
 
 ## Donate
