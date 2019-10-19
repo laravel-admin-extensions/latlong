@@ -108,11 +108,15 @@ class Latlong extends Field
      */
     public function render()
     {
-        $this->script = Extension::getProvider()->setAutoPosition($this->autoPosition)->applyScript($this->id);
+        $this->script = Extension::getProvider()
+            ->setParams([
+                'zoom' => $this->zoom
+            ])
+            ->setAutoPosition($this->autoPosition)
+            ->applyScript($this->id);
 
         $variables = [
             'height'   => $this->height,
-            'zoom'   => $this->zoom,
             'provider' => Extension::config('default'),
         ];
 

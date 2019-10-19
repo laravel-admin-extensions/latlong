@@ -54,10 +54,12 @@ class Extension extends BaseExtension
 
                 $lat = $this->{$lat};
                 $lng = $this->{$lng};
-
-                $id = ['lat' => 'lat', 'lng' => 'lng', 'zoom' => $zoom];
-
-                Admin::script(Extension::getProvider()->applyScript($id));
+                $id = ['lat' => 'lat', 'lng' => 'lng'];
+                Admin::script(Extension::getProvider()
+                    ->setParams([
+                        'zoom' => $zoom
+                    ])
+                    ->applyScript($id));
 
                 return <<<HTML
 <div class="row">

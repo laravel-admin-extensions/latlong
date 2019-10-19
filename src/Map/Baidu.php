@@ -17,7 +17,7 @@ class Baidu extends AbstractMap
     
         var map = new BMap.Map(name);
         var point = new BMap.Point(lng.val(), lat.val());
-        map.centerAndZoom(point, {$id['zoom']});
+        map.centerAndZoom(point, {$this->getParams('zoom')});
         map.enableScrollWheelZoom(true);
         
         var marker = new BMap.Marker(point);
@@ -67,7 +67,7 @@ class Baidu extends AbstractMap
         function setPlace(){
             function myFun(){
                 var pp = local.getResults().getPoi(0).point;
-                map.centerAndZoom(pp, {$id['zoom']});
+                map.centerAndZoom(pp, {$this->getParams('zoom')});
 
                 marker.setPosition(pp);
                 lat.val(pp.lat);
