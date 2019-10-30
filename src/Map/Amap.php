@@ -17,7 +17,7 @@ class Amap extends AbstractMap
         var lng = $('#{$id['lng']}');
     
         var map = new AMap.Map(name, {
-            zoom:18,
+            zoom: {$this->getParams('zoom')}
             center: [lng.val() || 0, lat.val() || 0],//中心点坐标
             viewMode:'3D'//使用3D视图
         });

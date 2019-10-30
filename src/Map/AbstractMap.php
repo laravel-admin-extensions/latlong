@@ -17,6 +17,11 @@ abstract class AbstractMap
     protected $api;
 
     /**
+     * @var array
+     */
+    protected $params;
+
+    /**
      * Tencent constructor.
      * @param $key
      */
@@ -35,6 +40,13 @@ abstract class AbstractMap
         return [$this->api];
     }
 
+    public function getParams($field = null) {
+        if($field) {
+            return isset($this->params[$field]) ? $this->params[$field] : null;
+        }
+        return $this->params;
+    }
+
     /**
      * Set true to automatically get the current position from the browser on page load
      * @param $bool
@@ -42,6 +54,11 @@ abstract class AbstractMap
      */
     public function setAutoPosition($bool) {
         $this->autoPosition = $bool;
+        return $this;
+    }
+
+    public function setParams($params) {
+        $this->params = $params;
         return $this;
     }
 

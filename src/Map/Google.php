@@ -24,7 +24,7 @@ class Google extends AbstractMap
                 var LatLng = new google.maps.LatLng(lat.val(), lng.val());
     
                 var options = {
-                    zoom: 18,
+                    zoom: {$this->getParams('zoom')},
                     center: LatLng,
                     panControl: false,
                     zoomControl: true,

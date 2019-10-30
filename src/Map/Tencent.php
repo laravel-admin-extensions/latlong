@@ -25,7 +25,7 @@ class Tencent extends AbstractMap
                 var container = document.getElementById("map_"+name);
                 var map = new qq.maps.Map(container, {
                     center: center,
-                    zoom: 18
+                    zoom: {$this->getParams('zoom')}
                 });
 
                 var marker = new qq.maps.Marker({
