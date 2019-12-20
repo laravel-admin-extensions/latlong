@@ -14,7 +14,7 @@
                 <input id="{{$id['lat']}}" name="{{$name['lat']}}" class="form-control" value="{{ old($column['lat'], $value['lat']) }}" {!! $attributes !!} />
             </div>
             <div class="col-md-6">
-                <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control" value="{{ old($column['address'], $value['address']) }}" {!! $attributes !!} />
+                <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
             </div>
 
             @if($provider != 'yandex')
