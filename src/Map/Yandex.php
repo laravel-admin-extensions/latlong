@@ -33,13 +33,15 @@ class Yandex extends AbstractMap
                         preset: 'islands#redDotIcon',
                         draggable: true
                     });
-    
-                    myPlacemark.events.add(['dragend'], function (e) {
+                    
+                    myMap.events.add('click', function (e) {
+                        var coords = e.get('coords');
+                        myPlacemark.geometry.setCoordinates(coords);
                         lat.val(myPlacemark.geometry.getCoordinates()[0]);
                         lng.val(myPlacemark.geometry.getCoordinates()[1]);
                         getAddress(myPlacemark.geometry.getCoordinates());
-                    });                
-    
+                    });
+            
                     myMap.geoObjects.add(myPlacemark);
                     
                     function getAddress(coords) {
