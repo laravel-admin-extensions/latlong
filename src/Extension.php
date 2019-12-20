@@ -48,13 +48,14 @@ class Extension extends BaseExtension
      */
     public static function showField()
     {
-        return function ($lat, $lng, $height = 300, $zoom = 16) {
+        return function ($lat, $lng, $address, $height = 300, $zoom = 16) {
 
-            return $this->unescape()->as(function () use ($lat, $lng, $height, $zoom) {
+            return $this->unescape()->as(function () use ($lat, $lng, $address, $height, $zoom) {
 
                 $lat = $this->{$lat};
                 $lng = $this->{$lng};
-                $id = ['lat' => 'lat', 'lng' => 'lng'];
+                $address = $this->{$address};
+                $id = ['lat' => 'lat', 'lng' => 'lng', 'address' => 'address'];
                 Admin::script(Extension::getProvider()
                     ->setParams([
                         'zoom' => $zoom

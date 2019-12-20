@@ -21,12 +21,13 @@ class Yandex extends AbstractMap
         
                     var lat = $('#{$id['lat']}');
                     var lng = $('#{$id['lng']}');
+                    var address = $('#{$id['address']}');
         
                     var myMap = new ymaps.Map("map_"+name, {
                         center: [lat.val(), lng.val()],
                         zoom: {$this->getParams('zoom')}
                     }); 
-    
+                    
                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
                     }, {
                         preset: 'islands#redDotIcon',
@@ -36,13 +37,23 @@ class Yandex extends AbstractMap
                     myPlacemark.events.add(['dragend'], function (e) {
                         lat.val(myPlacemark.geometry.getCoordinates()[0]);
                         lng.val(myPlacemark.geometry.getCoordinates()[1]);
+                        getAddress(myPlacemark.geometry.getCoordinates());
                     });                
     
                     myMap.geoObjects.add(myPlacemark);
-                });
-    
+                    
+                    function getAddress(coords) {
+                       ymaps.geocode(coords).then(function (res) {
+                           firstGeoObject = res.geoObjects.get(0);
+                           
+                           console.log(address);
+                           console.log(firstGeoObject.getAddressLine());
+                           address.val(firstGeoObject.getAddressLine());
+                        });
+                    }
+                });            
             }
-            
+                   
             init('{$id['lat']}{$id['lng']}');
         })();
 EOT;

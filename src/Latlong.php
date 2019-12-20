@@ -57,7 +57,9 @@ class Latlong extends Field
     {
         $this->column['lat'] = (string)$column;
         $this->column['lng'] = (string)$arguments[0];
+        $this->column['address'] = (string)$arguments[1];
 
+        array_shift($arguments);
         array_shift($arguments);
 
         $this->label = $this->formatLabel($arguments);
