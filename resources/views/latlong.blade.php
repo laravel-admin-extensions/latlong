@@ -13,9 +13,11 @@
             <div class="col-md-3">
                 <input id="{{$id['lat']}}" name="{{$name['lat']}}" class="form-control" value="{{ old($column['lat'], $value['lat']) }}" {!! $attributes !!} />
             </div>
-            <div class="col-md-6">
-                <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
-            </div>
+            <?php if (isset($id['address'])): ?>
+                <div class="col-md-6">
+                    <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
+                </div>
+            <?php endif; ?>
 
             @if($provider != 'yandex')
             <div class="col-md-3 col-md-offset-3">
