@@ -26,7 +26,7 @@ class Yandex extends AbstractMap
 
                                     var myMap = new ymaps.Map("map_"+name, {
                                         center: [lat.val(), lng.val()],
-                                        zoom: {$this->getParams('zoom')}
+                                        zoom: 16
                                     });
 
                                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
@@ -68,11 +68,27 @@ class Yandex extends AbstractMap
 
                                     var lat = $('#{$id['lat']}');
                                     var lng = $('#{$id['lng']}');
+                                    var zoom = $('#{$id['zoom']}');
 
-                                    var myMap = new ymaps.Map("map_"+name, {
-                                        center: [lat.val(), lng.val()],
-                                        zoom: {$this->getParams('zoom')}
-                                    });
+                                    if (zoom.length !== 0) {
+
+                                       var myMap = new ymaps.Map("map_"+name, {
+                                            center: [lat.val(), lng.val()],
+                                            zoom: zoom.val(),
+                                       });
+
+                                       ZoomLayout = ymaps.templateLayoutFactory.createClass('<div></div>');
+
+                                       zoomControl = new ymaps.control.ZoomControl({options: {layout: ZoomLayout}});
+                                       myMap.controls.add(zoomControl);
+
+                                    } else {
+
+                                       var myMap = new ymaps.Map("map_"+name, {
+                                            center: [lat.val(), lng.val()],
+                                            zoom: 16
+                                        });
+                                    }
 
                                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
                                     }, {

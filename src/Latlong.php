@@ -53,17 +53,21 @@ class Latlong extends Field
      * @param string $column
      * @param array $arguments
      */
-    public function __construct($column, $arguments)
+    public function __construct($columns, $arguments)
     {
-        $this->column['lat'] = (string)$column;
+        $this->column['lat'] = (string)$columns;
         $this->column['lng'] = (string)$arguments[0];
 
-        if (count($arguments) == 3)
-        {
-            $this->column['address'] = (string)$arguments[1];
+        if (in_array('address', $arguments)) {
+            $this->column['address'] = 'address';
             array_shift($arguments);
         }
-        
+
+        if (in_array('zoom', $arguments)) {
+            $this->column['zoom'] = 'zoom';
+            array_shift($arguments);
+        }
+
         array_shift($arguments);
 
         $this->label = $this->formatLabel($arguments);

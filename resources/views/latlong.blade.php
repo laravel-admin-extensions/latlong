@@ -18,6 +18,11 @@
                     <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
                 </div>
             <?php endif; ?>
+            <?php if (isset($id['zoom'])): ?>
+                <div class="col-md-3">
+                    <input id="{{$id['zoom']}}" name="{{$name['zoom']}}" class="form-control" value="{{ old($column['zoom'], (isset($value['zoom']))?$value['zoom']:'')}}" {!! $attributes !!} />
+                </div>
+            <?php endif; ?>
 
             @if($provider != 'yandex')
             <div class="col-md-3 col-md-offset-3">
