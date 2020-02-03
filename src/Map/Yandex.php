@@ -26,7 +26,7 @@ class Yandex extends AbstractMap
 
                                     var myMap = new ymaps.Map("map_"+name, {
                                         center: [lat.val(), lng.val()],
-                                        zoom: 16
+                                        zoom: 16,
                                     });
 
                                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
@@ -69,15 +69,49 @@ class Yandex extends AbstractMap
                                     var lat = $('#{$id['lat']}');
                                     var lng = $('#{$id['lng']}');
                                     var zoom = $('#{$id['zoom']}');
+                                    var test = $('#test').html();
 
                                     if (zoom.length !== 0) {
-
+                                    
+                                       if (zoom.val() == 0) {
+                                            zoom.val(16);
+                                       }
+                                     
                                        var myMap = new ymaps.Map("map_"+name, {
                                             center: [lat.val(), lng.val()],
                                             zoom: zoom.val(),
+                                            controls: []
                                        });
 
-                                       ZoomLayout = ymaps.templateLayoutFactory.createClass('<div></div>');
+                                       ZoomLayout = ymaps.templateLayoutFactory.createClass(test, {
+                                            build: function () {
+                                                            ZoomLayout.superclass.build.call(this);
+                                                            this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
+                                                            this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this);
+
+                                                            $('#zoom-in').bind('click', this.zoomInCallback);
+                                                            $('#zoom-out').bind('click', this.zoomOutCallback);
+                                                        },
+                                            
+                                            clear: function () {
+                                                            $('#zoom-in').unbind('click', this.zoomInCallback);
+                                                            $('#zoom-out').unbind('click', this.zoomOutCallback);
+
+                                                            ZoomLayout.superclass.clear.call(this);
+                                                        },
+                                                        
+                                            zoomIn: function () {
+                                                            var map = this.getData().control.getMap();
+                                                            map.setZoom(map.getZoom() + 1, {checkZoomRange: true});
+                                                            zoom.val(map.getZoom() + 1);
+                                                        },
+
+                                            zoomOut: function () {
+                                                            var map = this.getData().control.getMap();
+                                                            map.setZoom(map.getZoom() - 1, {checkZoomRange: true});
+                                                            zoom.val(map.getZoom() - 1);
+                                                        }
+                                       });
 
                                        zoomControl = new ymaps.control.ZoomControl({options: {layout: ZoomLayout}});
                                        myMap.controls.add(zoomControl);
