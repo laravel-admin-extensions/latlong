@@ -60,7 +60,7 @@ class Yandex extends AbstractMap
                             init('{$id['lat']}{$id['lng']}');
                         })();
                 EOT;
-        } else {
+        } elseif (isset($id['zoom'])) {
             return <<<EOT
                         (function() {
                             function init(name) {
@@ -123,6 +123,46 @@ class Yandex extends AbstractMap
                                             zoom: 16
                                         });
                                     }
+
+                                    var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
+                                    }, {
+                                        preset: 'islands#redDotIcon',
+                                        draggable: true
+                                    });
+
+                                    myMap.events.add('click', function (e) {
+                                        var coords = e.get('coords');
+                                        myPlacemark.geometry.setCoordinates(coords);
+                                        lat.val(myPlacemark.geometry.getCoordinates()[0]);
+                                        lng.val(myPlacemark.geometry.getCoordinates()[1]);
+                                    });
+
+                                    myMap.geoObjects.add(myPlacemark);
+
+                                    function getAddress(coords) {
+                                       ymaps.geocode(coords).then(function (res) {
+                                           firstGeoObject = res.geoObjects.get(0);
+                                        });
+                                    }
+                                });
+                            }
+
+                            init('{$id['lat']}{$id['lng']}');
+                        })();
+                EOT;
+        } else {
+            return <<<EOT
+                        (function() {
+                            function init(name) {
+                                ymaps.ready(function(){
+
+                                    var lat = $('#{$id['lat']}');
+                                    var lng = $('#{$id['lng']}');
+                                    
+                                    var myMap = new ymaps.Map("map_"+name, {
+                                        center: [lat.val(), lng.val()],
+                                        zoom: 16
+                                    });
 
                                     var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
                                     }, {
