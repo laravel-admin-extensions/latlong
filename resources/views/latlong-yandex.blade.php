@@ -52,53 +52,6 @@
     </div>
 </div>
 
-<?php if (isset($id['address'])) { ?>
-        <script>
-            $(document).ready(function () {
-                function init(name) {
-                ymaps.ready(function(){
-
-                var lat = $('#{{$id['lat']}}');
-                var lng = $('#{{$id['lng']}}');
-                var address = $('#{{$id['address']}}');
-
-                var myMap = new ymaps.Map("map_"+name, {
-                            center: [lat.val(), lng.val()],
-                            zoom: 16,
-                });
-
-                var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
-                    }, {
-                            preset: 'islands#redDotIcon',
-                            draggable: true
-                    });
-
-                myMap.events.add('click', function (e) {
-                var coords = e.get('coords');
-                myPlacemark.geometry.setCoordinates(coords);
-                lat.val(myPlacemark.geometry.getCoordinates()[0]);
-                lng.val(myPlacemark.geometry.getCoordinates()[1]);
-                getAddress(myPlacemark.geometry.getCoordinates());
-                });
-
-                myMap.geoObjects.add(myPlacemark);
-
-                function getAddress(coords) {
-                ymaps.geocode(coords).then(function (res) {
-                firstGeoObject = res.geoObjects.get(0);
-
-                console.log(address);
-                console.log(firstGeoObject.getAddressLine());
-                address.val(firstGeoObject.getAddressLine());
-                    });
-                }
-            });
-            }
-
-            init('{{$id['lat']}}{{$id['lng']}}');
-        });
-        </script>
-<?php } elseif (isset($id['zoom'])) { ?>
 
 <script>
     $(document).ready(function () {
@@ -107,7 +60,8 @@
 
                 var lat = $('#{{$id['lat']}}');
                 var lng = $('#{{$id['lng']}}');
-                var zoom = $('#{{$id['zoom']}}');
+                var address = $('#{{ isset($id['address'])?$id['address']:null }}');
+                var zoom = $('#{{ isset($id['zoom'])?$id['zoom']:null }}');
                 var test = $('#test').html();
 
                 if (zoom.length !== 0) {
@@ -119,7 +73,7 @@
                     var myMap = new ymaps.Map("map_"+name, {
                         center: [lat.val(), lng.val()],
                         zoom: zoom.val(),
-                        controls: []
+                        controls: [],
                     });
 
                     ZoomLayout = ymaps.templateLayoutFactory.createClass(test, {
@@ -156,10 +110,9 @@
                     myMap.controls.add(zoomControl);
 
                 } else {
-
                     var myMap = new ymaps.Map("map_"+name, {
                         center: [lat.val(), lng.val()],
-                        zoom: 16
+                        zoom: 16,
                     });
                 }
 
@@ -174,6 +127,10 @@
                     myPlacemark.geometry.setCoordinates(coords);
                     lat.val(myPlacemark.geometry.getCoordinates()[0]);
                     lng.val(myPlacemark.geometry.getCoordinates()[1]);
+
+                    if (address.length !== 0) {
+                        getAddress(myPlacemark.geometry.getCoordinates());
+                    }
                 });
 
                 myMap.geoObjects.add(myPlacemark);
@@ -181,56 +138,17 @@
                 function getAddress(coords) {
                     ymaps.geocode(coords).then(function (res) {
                         firstGeoObject = res.geoObjects.get(0);
+                        address.val(firstGeoObject.getAddressLine());
                     });
                 }
+
+
             });
         }
 
         init('{{$id['lat']}}{{$id['lng']}}');
     });
 </script>
-
-<?php  } else {  ?>
-
-<script>
-    $(document).ready(function () {
-        function init(name) {
-        ymaps.ready(function(){
-
-        var lat = $('#{{$id['lat']}}');
-        var lng = $('#{{$id['lng']}}');
-
-        var myMap = new ymaps.Map("map_"+name, {
-                    center: [lat.val(), lng.val()],
-                    zoom: 16
-        });
-
-        var myPlacemark = new ymaps.Placemark([lat.val(), lng.val()], {
-        }, {
-                        preset: 'islands#redDotIcon',
-                        draggable: true
-        });
-
-        myMap.events.add('click', function (e) {
-                    var coords = e.get('coords');
-                    myPlacemark.geometry.setCoordinates(coords);
-                    lat.val(myPlacemark.geometry.getCoordinates()[0]);
-                    lng.val(myPlacemark.geometry.getCoordinates()[1]);
-        });
-
-        myMap.geoObjects.add(myPlacemark);
-
-        function getAddress(coords) {
-                    ymaps.geocode(coords).then(function (res) {
-                    firstGeoObject = res.geoObjects.get(0);
-                    });
-            }
-            });
-        }
-        init('{{$id['lat']}}{{$id['lng']}}');
-        });
-</script>
-<?php } ?>
 
 <style>
     ymaps .btn {
