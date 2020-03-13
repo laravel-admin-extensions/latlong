@@ -62,7 +62,26 @@ class Extension extends BaseExtension
                     ])
                     ->applyScript($id));
 
-                return <<<HTML
+                if (isset($address)) {
+                    return <<<HTML
+<div class="row">
+    <div class="col-md-3">
+        <input id="{$id['lat']}" class="form-control" value="{$lat}"/>
+    </div>
+    <div class="col-md-3">
+        <input id="{$id['lng']}" class="form-control" value="{$lng}"/>
+    </div>
+    <div class="col-md-4">
+        <input id="{$id['address']}" class="form-control" value="{$address}"/>
+    </div>
+</div>
+
+<br>
+
+<div id="map_{$id['lat']}{$id['lng']}" style="width: 100%;height: {$height}px"></div>
+HTML;
+                }       else {
+                    return <<<HTML
 <div class="row">
     <div class="col-md-3">
         <input id="{$id['lat']}" class="form-control" value="{$lat}"/>
@@ -76,6 +95,9 @@ class Extension extends BaseExtension
 
 <div id="map_{$id['lat']}{$id['lng']}" style="width: 100%;height: {$height}px"></div>
 HTML;
+                }
+
+
             });
         };
     }
