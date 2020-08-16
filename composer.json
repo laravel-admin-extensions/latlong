@@ -1,5 +1,5 @@
 {
-    "name": "laravel-admin-ext/latlong",
+    "name": "koshkoshka/latlong",
     "description": "Latitude & Longitude selector",
     "type": "library",
     "keywords": ["laravel-admin", "extension"],
