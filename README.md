@@ -8,7 +8,7 @@ This extension is used to help you select the latitude and longitude in the form
 ## Installation
 
 ```bash
-composer require laravel-admin-ext/latlong -vvv
+composer require koshkoshka/latlong -vvv
 ```
 
 ## Configuration
