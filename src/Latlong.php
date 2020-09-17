@@ -122,6 +122,6 @@ class Latlong extends Field
 
         $this->addVariables($variables);
         
-        return parent::fieldRender($variables);
+        return parent::fieldRender();
     }
 }
