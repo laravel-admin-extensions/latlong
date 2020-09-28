@@ -28,7 +28,7 @@ class Latlong extends Field
      *
      * @var int
      */
-    protected $height = 300;
+    protected $height = 400;
 
     /**
      * Map Zoom
@@ -93,11 +93,15 @@ class Latlong extends Field
 
     /**
      * Set true to automatically get the current position from the browser on page load
+     *
      * @param $bool
+     *
      * @return Latlong
      */
-    public function setAutoPosition($bool) {
+    public function setAutoPosition($bool)
+    {
         $this->autoPosition = $bool;
+
         return $this;
     }
 
@@ -115,13 +119,11 @@ class Latlong extends Field
             ->setAutoPosition($this->autoPosition)
             ->applyScript($this->id);
 
-        $variables = [
+        $this->addVariables([
             'height'   => $this->height,
             'provider' => Extension::config('default'),
-        ];
+        ]);
 
-        $this->addVariables($variables);
-        
         return parent::fieldRender();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Encore\Admin\Latlong\Map;
 
-
 abstract class AbstractMap
 {
     /**
@@ -40,10 +39,16 @@ abstract class AbstractMap
         return [$this->api];
     }
 
-    public function getParams($field = null) {
+    /**
+     * @param null $field
+     * @return array|mixed|null
+     */
+    public function getParams($field = null)
+    {
         if($field) {
             return isset($this->params[$field]) ? $this->params[$field] : null;
         }
+
         return $this->params;
     }
 
@@ -52,13 +57,17 @@ abstract class AbstractMap
      * @param $bool
      * @return $this
      */
-    public function setAutoPosition($bool) {
+    public function setAutoPosition($bool)
+    {
         $this->autoPosition = $bool;
+
         return $this;
     }
 
-    public function setParams($params) {
+    public function setParams($params)
+    {
         $this->params = $params;
+
         return $this;
     }
 

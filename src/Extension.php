@@ -31,7 +31,7 @@ class Extension extends BaseExtension
      * @param string $name
      * @return Map\AbstractMap
      */
-    public static function getProvider($name = '')
+    public static function getProvider($name = 'google')
     {
         if (static::$provider) {
             return static::$provider;
@@ -63,10 +63,10 @@ class Extension extends BaseExtension
 
                 return <<<HTML
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-3">
         <input id="{$id['lat']}" class="form-control" value="{$lat}"/>
     </div>
-    <div class="col-md-3">
+    <div class="col-3">
         <input id="{$id['lng']}" class="form-control" value="{$lng}"/>
     </div>
 </div>
