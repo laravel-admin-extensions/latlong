@@ -53,10 +53,20 @@ class Latlong extends Field
      * @param string $column
      * @param array $arguments
      */
-    public function __construct($column, $arguments)
+    public function __construct($columns, $arguments)
     {
-        $this->column['lat'] = (string)$column;
+        $this->column['lat'] = (string)$columns;
         $this->column['lng'] = (string)$arguments[0];
+
+        if (in_array('address', $arguments)) {
+            $this->column['address'] = 'address';
+            array_shift($arguments);
+        }
+
+        if (in_array('zoom', $arguments)) {
+            $this->column['zoom'] = 'zoom';
+            array_shift($arguments);
+        }
 
         array_shift($arguments);
 
@@ -108,17 +118,19 @@ class Latlong extends Field
      */
     public function render()
     {
-        $this->script = Extension::getProvider()
-            ->setParams([
-                'zoom' => $this->zoom
-            ])
-            ->setAutoPosition($this->autoPosition)
-            ->applyScript($this->id);
+//        $this->script = Extension::getProvider()
+//            ->setParams([
+//                'zoom' => $this->zoom
+//            ])
+//            ->setAutoPosition($this->autoPosition)
+//            ->applyScript($this->id);
 
         $variables = [
             'height'   => $this->height,
             'provider' => Extension::config('default'),
         ];
+        
+        $this->view = 'laravel-admin-latlong::latlong-yandex';
 
         $this->addVariables($variables);
         

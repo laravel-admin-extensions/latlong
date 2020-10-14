@@ -48,20 +48,40 @@ class Extension extends BaseExtension
      */
     public static function showField()
     {
-        return function ($lat, $lng, $height = 300, $zoom = 16) {
+        return function ($lat, $lng, $address, $zoom, $height = 300) {
 
-            return $this->unescape()->as(function () use ($lat, $lng, $height, $zoom) {
+            return $this->unescape()->as(function () use ($lat, $lng, $address, $zoom, $height) {
 
                 $lat = $this->{$lat};
                 $lng = $this->{$lng};
-                $id = ['lat' => 'lat', 'lng' => 'lng'];
+                $address = $this->{$address};
+                $id = ['lat' => 'lat', 'lng' => 'lng', 'address' => 'address', 'zoom' => 'zoom'];
                 Admin::script(Extension::getProvider()
                     ->setParams([
                         'zoom' => $zoom
                     ])
                     ->applyScript($id));
 
-                return <<<HTML
+                if (isset($address)) {
+                    return <<<HTML
+<div class="row">
+    <div class="col-md-3">
+        <input id="{$id['lat']}" class="form-control" value="{$lat}"/>
+    </div>
+    <div class="col-md-3">
+        <input id="{$id['lng']}" class="form-control" value="{$lng}"/>
+    </div>
+    <div class="col-md-4">
+        <input id="{$id['address']}" class="form-control" value="{$address}"/>
+    </div>
+</div>
+
+<br>
+
+<div id="map_{$id['lat']}{$id['lng']}" style="width: 100%;height: {$height}px"></div>
+HTML;
+                }       else {
+                    return <<<HTML
 <div class="row">
     <div class="col-md-3">
         <input id="{$id['lat']}" class="form-control" value="{$lat}"/>
@@ -75,6 +95,9 @@ class Extension extends BaseExtension
 
 <div id="map_{$id['lat']}{$id['lng']}" style="width: 100%;height: {$height}px"></div>
 HTML;
+                }
+
+
             });
         };
     }
