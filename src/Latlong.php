@@ -120,6 +120,8 @@ class Latlong extends Field
             'provider' => Extension::config('default'),
         ];
 
-        return parent::render()->with($variables);
+        $this->addVariables($variables);
+        
+        return parent::fieldRender();
     }
 }
