@@ -1,9 +1,9 @@
 {
-    "name": "laravel-admin-ext/latlong",
+    "name": "sicaboy/laravel-admin-ext-latlong",
     "description": "Latitude & Longitude selector",
     "type": "library",
     "keywords": ["laravel-admin", "extension"],
-    "homepage": "https://github.com/laravel-admin-ext/latlong",
+    "homepage": "https://github.com/sicaboy/laravel-admin-ext-latlong",
     "license": "MIT",
     "authors": [
         {
@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "encore/laravel-admin": "~1.6"
+        "sicaboy/laravel-admin": "~1.6"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.0"
