@@ -132,6 +132,9 @@ class Latlong extends Field
         
         $this->view = 'laravel-admin-latlong::latlong-yandex';
 
-        return parent::render()->with($variables);
+
+        $this->addVariables($variables);
+
+        return parent::fieldRender();
     }
 }
