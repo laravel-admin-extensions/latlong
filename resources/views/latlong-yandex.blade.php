@@ -1,3 +1,11 @@
+<style>
+    .disabled {
+        opacity: 0.1 !important; /* Fade effect */
+        cursor: not-allowed;
+        background-color: grey;
+    }
+</style>
+
 <div class="{{$viewClass['form-group']}} {!! !$errors->has($errorKey) ? '' : 'has-error' !!}">
 
     <label for="{{$id['lat']}}" class="{{$viewClass['label']}} control-label">{{$label}}</label>
@@ -15,7 +23,7 @@
             </div>
             <?php if (isset($id['address'])): ?>
                 <div class="col-md-6">
-                    <input id="{{$id['address']}}" name="{{$name['address']}}" disabled class="form-control" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
+                    <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control disabled" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
                 </div>
             <?php endif; ?>
             <?php if (isset($id['zoom'])): ?>
@@ -130,7 +138,7 @@
 
                     if (address.length !== 0) {
                         getAddress(myPlacemark.geometry.getCoordinates());
-                        address.attr('disabled', false);
+                        address.removeClass('disabled');
                     }
                 });
 
