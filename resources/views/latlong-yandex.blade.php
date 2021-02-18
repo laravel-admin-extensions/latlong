@@ -22,7 +22,7 @@
             </div>
             <?php if (isset($id['address'])): ?>
                 <div class="col-md-6">
-                    <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control disabled" value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
+                    <input id="{{$id['address']}}" name="{{$name['address']}}" class="form-control disabled" readonly value="{{ old($column['address'], (isset($value['address']))?$value['address']:'')}}" {!! $attributes !!} />
                 </div>
             <?php endif; ?>
             <?php if (isset($id['zoom'])): ?>
@@ -138,6 +138,7 @@
                     if (address.length !== 0) {
                         getAddress(myPlacemark.geometry.getCoordinates());
                         address.removeClass('disabled');
+                        address.attr('readonly', false);
                     }
                 });
 
