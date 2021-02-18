@@ -1,8 +1,7 @@
 <style>
     .disabled {
-        opacity: 0.1 !important; /* Fade effect */
         cursor: not-allowed;
-        background-color: grey;
+        background-color: #eeeeee;
     }
 </style>
 
