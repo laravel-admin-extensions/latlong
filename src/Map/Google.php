@@ -7,7 +7,7 @@ class Google extends AbstractMap
     /**
      * @var string
      */
-    protected $api = '//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=%s&libraries=places';
+    protected $api = '//maps.googleapis.com/maps/api/js?v=3.exp&key=%s&libraries=places';
 
     /**
      * {@inheritdoc}
