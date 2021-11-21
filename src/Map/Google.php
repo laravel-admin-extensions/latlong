@@ -42,6 +42,7 @@ class Google extends AbstractMap
                       lng: position.coords.longitude
                     };
                     map.setCenter(pos);
+                    marker.setPosition(pos);
                     
                     lat.val(position.coords.latitude);
                     lng.val(position.coords.longitude);
